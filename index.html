@@ -58,6 +58,7 @@
       <div class="margin-right-block"></div>
     </div>
 
+    <!-- CITE WITH THIS <a href="#ref_1">[1]</a> -->
     <div class="content-margin-container" id="intro">
       <div class="margin-left-block">
         <!-- table of contents here -->
@@ -103,7 +104,7 @@
         learning, test these embeddings on sequence-to-sequence (seq2seq) tasks,
         and compare their performance to existing methods.
       </div>
-      <div class="margin-right-block">Delete this</div>
+      <div class="margin-right-block"></div>
     </div>
 
     <div class="content-margin-container" id="intro">
@@ -111,28 +112,45 @@
       <div class="main-content-block">
         <h1>Background and Related Work</h1>
 
-        Contrastive Learning was popularized through SimCLR in computer vision.
-        In the audio domain, this framework has been extended, used in music
-        [CLMR, MULE] and speech [Speech SimCLR], leading to competitive
-        performance in music (genre classification, multi-class classification)
-        and speech benchmarks (speech emotion recognition).
+        Contrastive Learning was popularized through SimCLR (Chen et al. 2020)
+        in computer vision. In the audio domain, this framework has been
+        extended, used in music [CLMR (Spijkervet et al, 2020), MULE (McCalllum
+        et al. 2022)] and speech [Speech SimCLR (Dongwei et al., 2020)], leading
+        to competitive performance in music and speech benchmarks.
         <br /><br />
-        The MARBLE Benchmark was specifically developed to probe and compare
-        embeddings from a range of popular music models, including those derived
-        from contrastive learning (e.g., CLMR and MULE) as well as models like
-        Jukebox, MusicCNN, and the MAP-based family (MAP-Music2Vec, MAP-MERT).
-        While MULE and Jukebox achieved leading performance on high-level tasks
-        such as genre classification, they were not evaluated on seq2seq tasks
-        like chord estimation and beat tracking, as they lack frame-level
-        embeddings. In contrast, models from the MAP-based family provide
-        frame-level embeddings, making them better suited for these tasks.
-        <br /><br />
+
+        The MARBLE Benchmark (Music Audio Representation Benchmark for Universal
+        Evaluation, Yuan et al., 2023) was specifically developed to probe and
+        compare embeddings from a range of popular music models, including those
+        derived from contrastive learning (e.g., CLMR and MULE) as well as
+        models like Jukebox, MusicCNN, and the MAP-based family (MAP-Music2Vec,
+        MAP-MERT). While MULE and Jukebox achieved leading performance on
+        high-level tasks such as genre classification, they were not evaluated
+        on seq2seq tasks like chord estimation and beat tracking, as they lack
+        frame-level embeddings. In contrast, models from the MAP-based family
+        provide frame-level embeddings, making them better suited for these
+        tasks. <br /><br />
+
+        Li et al. 2023 identifies that there exists a large gap between
+        understanding and evaluation of ‘clip-level’ vs ‘frame-level’ MIR tasks,
+        where clip level tasks classify the acoustic scene of an entire audio
+        clip and ‘frame-level’ tasks must detect and account for time-stamped
+        events. They address this by developing two versions of an Audio
+        Teacher-Student Transformer model (ATST), with a clip-level version
+        (named ATST-Clip) and a frame-level version (named ATST-Frame).
+        Evaluation of contrastive learning methods on frame-level tasks however
+        has not been thoroughly explored. Additionally, having one model able to
+        perform both clip-level and frame-level tasks would be more desirable,
+        so that it can capture meaningful clip level and frame level musical
+        aspects at the same time.<br /><br />
         Motivated by this gap, we aim to assess whether frame-level embeddings
         can be derived from contrastive learning methods. We will evaluate these
         embeddings on downstream seq2seq tasks, focusing on chord estimation, to
         compare their performance with existing methods.
 
-        <h4>Contrastive Predictive Encoding</h4>
+        <h1>Related Work</h1>
+        Here, we give a brief overfiew of models used in our experiments.
+        <h4>Contrastive Predictive Coding</h4>
         <div class="content-margin-container">
           <div class="margin-left-block"></div>
           <div class="main-content-block">
@@ -143,7 +161,7 @@
           </div>
         </div>
 
-        <br />
+        <br /><br />
         We chose to use Contrastive Predictive Coding (CPC) to learn frame-level
         musical representations due to its similarity to SimCLR and
         compatibility with sequential data. Similar to SimCLR, CPC uses postivie
@@ -157,7 +175,7 @@
         \(k\) samples. CPC minimizes a probabilistic contrastive loss, shown
         below.
       </div>
-      <div class="margin-right-block">Delete this</div>
+      <div class="margin-right-block"></div>
     </div>
 
     <div class="content-margin-container">
@@ -168,6 +186,27 @@
       <div class="margin-right-block">
         Equation 1: probabilistic contrastive loss
       </div>
+    </div>
+
+    <div class="content-margin-container">
+      <div class="margin-left-block"></div>
+      <div class="main-content-block">
+        <h1>Jukebox</h1>
+        JukeBox (Dhariwal et al., 2020) is a music generation model developed by
+        Open-AI to address handling long-range dependencies in music, as a
+        typical song can have over 10 million timesteps. They leverage a VQ-VAE
+        (Razavi et al., 2019), a method originally used on images to compress
+        audio to a lower dimensional space. They use an autoregressive sparse
+        transformer in this space and autoregressive up samplers to recreate
+        lost information at different compression levels. JukeBox has been shown
+        to generate songs from a diverse array of genres and can generate novel
+        completions to music. In the MARBLE Benchmark however, they have yet
+        been used to assess frame-level MIR tasks like beat tracking, and chord
+        estimation. Since JukeBox is able to capture many musical aspects needed
+        for music generation, this will serve as a competitive comparison to our
+        embeddings derived from CPC.
+      </div>
+      <div class="margin-right-block"></div>
     </div>
 
     <div class="content-margin-container">
@@ -253,7 +292,8 @@
       <div class="margin-left-block"></div>
       <div class="main-content-block">
         <h1>Jukebox Embeddings</h1>
-        Talk about Jukebox
+        We were able to find Jukebox embeddings for the GuitarSet dataset only,
+        and used this later on in the chord estimation task.
       </div>
       <div class="margin-right-block"></div>
     </div>
@@ -322,11 +362,17 @@
         >
           GuitarSet</a
         >
-        dataset for the chord estimation task. GuitarSet is a dataset of
-        annotated guitar recordings. Annotations contain not only notes but
-        labeled chords as well. For labelling, we decided to restrict the set of
-        possible chords to those used in the MARBLE benchmark. A subset is shown
-        below.
+        dataset for the chord estimation task. GuitarSet comprises of 360 guitar
+        recording excerpts with detailed annotations, spanning five musical
+        styles—Rock, Singer-Songwriter, Bossa Nova, Jazz, and Funk—and three
+        chord progressions: 12-Bar Blues, Autumn Leaves, and Pachelbel Canon.
+        The dataset provides raw audio files accompanied by metadata in the form
+        of JAMS files. Each JAMS file describes every chord played, including
+        its start time and duration. Below is a visualization of the JAMS file
+        data for one audio file from the dataset. <br /><br />
+
+        For labelling, we decided to restrict the set of possible chords to
+        those used in the MARBLE benchmark. A subset is shown below.
 
         <img src="./images/chord_vocab.png" />
         All possible combinations of root notes and chord types added up to 420
@@ -398,29 +444,130 @@
       <div class="main-content-block">
         <h2>Downstream Tasks</h2>
         <h1>Automatic Note Transcription</h1>
-		We generated graphs of training loss and accuracy.
-		<img src="./images/music_transcription_jtm/classifierTrainLoss.jpeg" />
-		<img src="./images/music_transcription_jtm/classTrainAcc.jpeg" />
-		Originally, the results looked quite good but then we tried visualizing the predicted notes against the labels.
-		<img src="./images/music_transcription_jtm/class_note_vis.png" />
+        We used embeddings from the CPC Model on the downstream task of note
+        transcription.
+        <img src="./images/music_transcription_jtm/classifierTrainLoss.jpeg" />
+        <img src="./images/music_transcription_jtm/classTrainAcc.jpeg" />
+        Originally, the results looked quite good but then we tried visualizing
+        the predicted notes against the labels.
+        <img src="./images/music_transcription_jtm/class_note_vis.png" />
+        The reddish lines indicate the ground-truth labeled notes, and the gray
+        lines are predictions. We guessed that the classifier architecture was
+        probably not complex enough to achieve good test performance. We wanted
+        to test an LSTM, but ran out of time.
       </div>
       <div class="margin-right-block"></div>
     </div>
-    
 
-    <!-- <div class="content-margin-container">
+    <div class="content-margin-container">
       <div class="margin-left-block"></div>
       <div class="main-content-block">
-        <h1>Background and Related Work</h1>
-        In this section we embed a video:
-        <video class="my-video" loop autoplay muted style="width: 725px">
-          <source src="./images/mtsh.mp4" type="video/mp4" />
-        </video>
+        <h1>Chord Estimation</h1>
+        <b>CPC Embeddings</b> <br />
+        We found that the CPC embeddings did not work well for chord estimation,
+        especially since the encoder was not trained on GuitarSet. Additionally,
+        we found again that the classifier architecture did not really suit the
+        task.
+        <img src="./images/chord_jtm/chord_train_acc.jpeg" />
+        The train accuracy was not bad in total, but the purple line represents
+        the accuracy when only considering active notes- predicting silence does
+        not count, and this maximally achieves 10% accuracy.
+        <img src="./images/chord_jtm/chord_val_acc.jpeg" />
+        The validation accuracy was worse and also suggested that the model was
+        overfitting- we adjusted the number of units in the hidden layer to 25
+        and added dropout, but still found that the validation accuracy would
+        start going down after a couple epochs. <br /><br />
+
+        We additionally visualized some of the chords, where the red lines are
+        labels and the grayish ones are predictions: <br />
+        <div
+          style="
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+          "
+        >
+          <img src="./images/chord_jtm/graph1.png" alt="Graph 1" width="50%" />
+          <img src="./images/chord_jtm/graph2.png" alt="Graph 2" width="50%" />
+        </div>
+        We explored different transcription window sizes, but found that
+        performance was roughly the same. <br /><br /><br />
+
+        <b>Jukebox</b> <br />
+        In the Jukebox downstream chord estimation task, we also calculated the
+        two separate accuracies mentioned above: total prediction accuracy and
+        non-silence prediction accuracy. The latter measures performance only on
+        samples where chords are actually being played, which naturally yielded
+        lower values than total accuracy. This is because silent frames were the
+        most represented class in our data, and although the model could
+        discriminate well when there was silence, it had a much lower accuracy
+        when only looking at music playing frames. Over the course of training,
+        both train and validation loss decreased while accuracy increased, as
+        shown in the loss and accuracy curves below. We trained the model for 10
+        epochs but observed that the accuracy had not yet plateaued, indicating
+        potential for further improvement with more computational resources and
+        extended training time. After 10 epochs, the model achieved the
+        following accuracies: <br />
+        Test Accuracy (all chord labels): \(0.537\) <br />
+        Test Accuracy (non-silence labels only): \(0.247\) <br />
+        We visualized the model's predictions on the test set by plotting
+        predicted vs. actual chords for the first three seconds of test audio
+        data (225 embeddings). <br />
+
+        <img src="./images/jukebox_res.jpeg" />
+        This smaller window was chosen to better visualize patterns in the
+        predicted chords. The actual chords often remained consistent across
+        multiple frames, but the model treated each frame independently, failing
+        to capture temporal continuity. This observation suggests that a
+        different probing mechanism—such as an LSTM instead of an MLP—might
+        better capture the temporal dynamics of chord transitions. With more
+        time and resources, experimenting with such approaches could yield
+        improved results. <br /><br />
+        The JukeBox embeddings ended up achieving higher accuracy and lower loss
+        than JTM. However there is some limitation to this comparison as the
+        embeddings went through different pre-processing steps. JukeBox took
+        input in 25 second chunks and was pooled slightly differently than JTM.
+        They were also downsampled at different values. With more time, we could
+        put in more effort to control for these parameters for a closer
+        comparison of the embeddings.
       </div>
-      <div class="margin-right-block">
-        A caption for the video could go here.
+      <div class="margin-right-block"></div>
+    </div>
+
+    <div class="content-margin-container">
+      <div class="margin-left-block"></div>
+      <div class="main-content-block">
+        <h1>Conclusion</h1>
+        This project demonstrates that embeddings generated from contrastive
+        learning methods, such as CPC, effectively capture frame-level and
+        temporal information. While JukeBox achieved higher accuracy, it is a
+        significantly larger model with many more parameters compared to JTM.
+        <br /><br />
+        One limitation of this study was the dominance of silent frames in the
+        dataset. With additional time and resources, re-running these models on
+        filtered data with fewer silent frames could improve performance and
+        provide a clearer understanding of the embeddings’ capacity to
+        differentiate between chords. While using a separate accuracy metric for
+        non-silence frames and a weighted loss function helps address this
+        imbalance, less class imbalance might allow the model to better adjust
+        its weights for discriminating chord classes. <br /><br />Exploring
+        alternative probing mechanisms, such as an LSTM instead of an MLP, could
+        help us investigate whether the embeddings effectively capture temporal
+        patterns. Since CPC looks at future predictions to calculate embeddings,
+        it should theoretically encode temporal information, but a classifier
+        head more suited to making use of this information would probably
+        improve performance. <br /><br />In conclusion, this work highlights the
+        potential of contrastive learning in capturing complex temporal and
+        contextual information in audio data. Future efforts can build on these
+        findings by improving dataset balance, testing more sophisticated
+        probing methods, and designing evaluation tasks tailored to temporal
+        understanding. These directions hold promise for advancing both the
+        interpretability and utility of contrastive learning methods in audio
+        representation tasks.
       </div>
-    </div> -->
+      <div class="margin-right-block"></div>
+    </div>
 
     <div class="content-margin-container" id="citations">
       <div class="margin-left-block"></div>
