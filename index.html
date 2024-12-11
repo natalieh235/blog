@@ -112,15 +112,14 @@
       <div class="main-content-block">
         <h2>Background</h2>
 
-        Contrastive Learning was popularized through SimCLR (Chen et al. 2020)
+        Contrastive Learning was popularized through SimCLR <a href="#ref_1">[1]</a> 
         in computer vision. In the audio domain, this framework has been
-        extended, used in music [CLMR (Spijkervet et al, 2020), MULE (McCalllum
-        et al. 2022)] and speech [Speech SimCLR (Dongwei et al., 2020)], leading
+        extended, used in music [CLMR <a href="#ref_2">[2]</a>  , MULE <a href="#ref_3">[3]</a>] and speech [Speech SimCLR <a href="#ref_4">[4]</a>], leading
         to competitive performance in music and speech benchmarks.
         <br /><br />
 
         The MARBLE Benchmark (Music Audio Representation Benchmark for Universal
-        Evaluation, Yuan et al., 2023) was specifically developed to probe and
+        Evaluation <a href="#ref_4">[4]</a>  ) was specifically developed to probe and
         compare embeddings from a range of popular music models, including those
         derived from contrastive learning (e.g., CLMR and MULE) as well as
         models like Jukebox, MusicCNN, and the MAP-based family (MAP-Music2Vec,
@@ -131,7 +130,7 @@
         provide frame-level embeddings, making them better suited for these
         tasks. <br /><br />
 
-        Li et al. 2023 identifies that there exists a large gap between
+        Li et al. 2023 <a href="#ref_6">[6]</a> identifies that there exists a large gap between
         understanding and evaluation of ‘clip-level’ vs ‘frame-level’ MIR tasks,
         where clip level tasks classify the acoustic scene of an entire audio
         clip and ‘frame-level’ tasks must detect and account for time-stamped
@@ -162,7 +161,7 @@
         </div>
 
         <br /><br />
-        We chose to use Contrastive Predictive Coding (CPC) to learn frame-level
+        We chose to use Contrastive Predictive Coding (CPC) <a href="#ref_7">[7]</a> to learn frame-level
         musical representations due to its similarity to SimCLR and
         compatibility with sequential data. CPC uses positive and negative
         example pairs to learn representations, as well as an autoregressive
@@ -191,10 +190,10 @@
       <div class="margin-left-block"></div>
       <div class="main-content-block">
         <h1>Jukebox</h1>
-        JukeBox (Dhariwal et al., 2020) is a music generation model developed by
+        JukeBox <a href="#ref_8">[8]</a> is a music generation model developed by
         Open-AI to address handling long-range dependencies in music, as a
         typical song can have over 10 million timesteps. They leverage a VQ-VAE
-        (Razavi et al., 2019), a method originally used on images to compress
+        <a href="#ref_9">[9]</a>, a method originally used on images to compress
         audio to a lower dimensional space. They use an autoregressive sparse
         transformer in this space and autoregressive up samplers to recreate
         lost information at different compression levels. JukeBox has been shown
@@ -360,7 +359,7 @@
         >
           GuitarSet</a
         >
-        dataset for the chord estimation task. GuitarSet comprises of 360 guitar
+        dataset for the chord estimation task. GuitarSet<a href="#ref_10">[10]</a> comprises of 360 guitar
         recording excerpts with detailed annotations, spanning five musical
         styles—Rock, Singer-Songwriter, Bossa Nova, Jazz, and Funk—and three
         chord progressions: 12-Bar Blues, Autumn Leaves, and Pachelbel Canon.
@@ -383,8 +382,8 @@
 
         <b>Jukebox Embeddings</b> <br />
         The process for extracting GuitarSet Jukebox embeddings was based on the
-        method described in Castellon et al. (2021), with modifications inspired
-        by Spotify's Llark paper. Specifically, we used the output from the 36th
+        method described in Castellon et al. (2021)<a href="#ref_11">[11]</a>, with modifications inspired
+        by Spotify's Llark paper <a href="#ref_12">[12]</a>. Specifically, we used the output from the 36th
         layer of the Jukebox encoder. The original Jukebox encoding produces a
         4800-dimensional vector sampled at 345 Hz. To preprocess the audio, we
         chunked it into 25-second clips—the maximum input length for Jukebox.
