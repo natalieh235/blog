@@ -148,7 +148,7 @@
         compare their performance with existing methods. <br /><br />
 
         <h1>Related Work</h1>
-        Here, we give a brief overfiew of models used in our experiments.
+        Here, we give a brief overview of models used in our experiments.
         <h4>Contrastive Predictive Coding</h4>
         <div class="content-margin-container">
           <div class="margin-left-block"></div>
@@ -189,7 +189,7 @@
     <div class="content-margin-container">
       <div class="margin-left-block"></div>
       <div class="main-content-block">
-        <h1>Jukebox</h1>
+        <h4>Jukebox</h4>
         JukeBox <a href="#ref_8">[8]</a> is a music generation model developed by
         Open-AI to address handling long-range dependencies in music, as a
         typical song can have over 10 million timesteps. They leverage a VQ-VAE
@@ -216,13 +216,13 @@
         two different encoders, one with CPC and one with the Jukebox encodings,
         and evaluate their performance on two downstream tasks: automatic
         transcription and chord estimation.
-        <br />
+        <br /><br />
         We based our CPC implementation off the Jaka to Melody (JTM) repository.
         We also use embeddings from Jukebox as a comparison. Jukebox embeddings
         were chosen as they are a good non-contrastive method to compare our
         results, and evaluating them fills a gap in knowledge as they have not
         yet been assessed on frame-level tasks in the MARBLE benchmark.
-        <br />
+        <br /><br />
         Our experiments consist of testing different encoder + downstream task
         combinations. We trained the following: <br />
         CPC encoder <br />
@@ -313,7 +313,8 @@
         by the autoregressive model in CPC, which should encode both the actual
         data and its context. The dataset we used for this task was the same one
         we used to train the encoder, MusicNet. However, we focused only on
-        samples that were played by Solo Piano, to reduce complexity. <br />
+        samples that were played by Solo Piano, to reduce complexity. <br /><br />
+		
         To test these embeddings on a downstream task, we define a transcription
         window of fixed length, and split the audio samples based on this
         window. We align the embeddings for that window with the correct
