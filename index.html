@@ -84,10 +84,24 @@
       <div class="margin-left-block"></div>
       <div class="main-content-block">
         <h1>Introduction</h1>
-        Contrastive learning has demonstrated significant success in domains like computer vision and natural language processing by creating robust, generalized embeddings from unlabeled data. This method is especially valuable in the field of musical information retrieval (MIR) tasks, where annotating and labeling music and audio data is time-intensive, and the ratio of labeled to unlabeled data is heavily skewed. In this project, we wish to apply contrastive learning techniques to create musical embeddings and evaluate their utility in MIR tasks. 
+        Contrastive learning has demonstrated significant success in domains
+        like computer vision and natural language processing by creating robust,
+        generalized embeddings from unlabeled data. This method is especially
+        valuable in the field of musical information retrieval (MIR) tasks,
+        where annotating and labeling music and audio data is time-intensive,
+        and the ratio of labeled to unlabeled data is heavily skewed. In this
+        project, we wish to apply contrastive learning techniques to create
+        musical embeddings and evaluate their utility in MIR tasks.
         <br /><br />
-        While musical embeddings derived from contrastive learning methods have been applied to high-level tasks such as classifying tags (e.g., genre, emotion, or artist), they have not yet been evaluated on frame-level tasks. Frame-level tasks, including chord estimation and beat tracking, differ from high-level tasks as they require embeddings that capture temporal information at a fine granularity. Our goal is to explore strategies for generating frame-level embeddings using contrastive learning, test these embeddings on sequence-to-sequence (seq2seq) tasks, and compare their performance to existing methods.
-
+        While musical embeddings derived from contrastive learning methods have
+        been applied to high-level tasks such as classifying tags (e.g., genre,
+        emotion, or artist), they have not yet been evaluated on frame-level
+        tasks. Frame-level tasks, including chord estimation and beat tracking,
+        differ from high-level tasks as they require embeddings that capture
+        temporal information at a fine granularity. Our goal is to explore
+        strategies for generating frame-level embeddings using contrastive
+        learning, test these embeddings on sequence-to-sequence (seq2seq) tasks,
+        and compare their performance to existing methods.
       </div>
       <div class="margin-right-block">Delete this</div>
     </div>
@@ -96,13 +110,28 @@
       <div class="margin-left-block"></div>
       <div class="main-content-block">
         <h1>Background and Related Work</h1>
-        
-        Contrastive Learning was popularized through SimCLR in computer vision. In the audio domain, this framework has been extended, used in music [CLMR, MULE] and speech [Speech SimCLR], leading to competitive performance in music (genre classification, multi-class classification) and speech benchmarks (speech emotion recognition).
+
+        Contrastive Learning was popularized through SimCLR in computer vision.
+        In the audio domain, this framework has been extended, used in music
+        [CLMR, MULE] and speech [Speech SimCLR], leading to competitive
+        performance in music (genre classification, multi-class classification)
+        and speech benchmarks (speech emotion recognition).
         <br /><br />
-        The MARBLE Benchmark was specifically developed to probe and compare embeddings from a range of popular music models, including those derived from contrastive learning (e.g., CLMR and MULE) as well as models like Jukebox, MusicCNN, and the MAP-based family (MAP-Music2Vec, MAP-MERT). While MULE and Jukebox achieved leading performance on high-level tasks such as genre classification, they were not evaluated on seq2seq tasks like chord estimation and beat tracking, as they lack frame-level embeddings. In contrast, models from the MAP-based family provide frame-level embeddings, making them better suited for these tasks.
+        The MARBLE Benchmark was specifically developed to probe and compare
+        embeddings from a range of popular music models, including those derived
+        from contrastive learning (e.g., CLMR and MULE) as well as models like
+        Jukebox, MusicCNN, and the MAP-based family (MAP-Music2Vec, MAP-MERT).
+        While MULE and Jukebox achieved leading performance on high-level tasks
+        such as genre classification, they were not evaluated on seq2seq tasks
+        like chord estimation and beat tracking, as they lack frame-level
+        embeddings. In contrast, models from the MAP-based family provide
+        frame-level embeddings, making them better suited for these tasks.
         <br /><br />
-        Motivated by this gap, we aim to assess whether frame-level embeddings can be derived from contrastive learning methods. We will evaluate these embeddings on downstream seq2seq tasks, focusing on chord estimation, to compare their performance with existing methods.
-        
+        Motivated by this gap, we aim to assess whether frame-level embeddings
+        can be derived from contrastive learning methods. We will evaluate these
+        embeddings on downstream seq2seq tasks, focusing on chord estimation, to
+        compare their performance with existing methods.
+
         <h4>Contrastive Predictive Encoding</h4>
         <div class="content-margin-container">
           <div class="margin-left-block"></div>
@@ -127,12 +156,10 @@
         of the context \(c_t\). Specifically, CPC tries to predict the next
         \(k\) samples. CPC minimizes a probabilistic contrastive loss, shown
         below.
-        
       </div>
       <div class="margin-right-block">Delete this</div>
     </div>
 
-    
     <div class="content-margin-container">
       <div class="margin-left-block"></div>
       <div class="main-content-block">
@@ -143,24 +170,34 @@
       </div>
     </div>
 
-    
-
     <div class="content-margin-container">
       <div class="margin-left-block"></div>
       <div class="main-content-block">
         <h2>Methods and Experiments</h2>
-        The contrastive learning model we picked to derive frame level embeddings was Jaka to Melody (JTM) which utilizes contrastive predictive encoding (CPC). We also wished to use embeddings from Jukebox as a comparison, which is a popular music generation model developed by Open AI. Jukebox embeddings were chosen as they are a good non-contrastive method to compare our results, and evaluating them fills a gap in knowledge as they were also not assessed on frame-level tasks in the MARBLE benchmark.  
-      
-      
+        As an overview, we wanted to explore how different music embeddings
+        performed on seq2seq downstream tasks. We explore embeddings generated
+        by two different encoders, one with CPC and the Jukebox encodings which
+        are generated using student-teacher moddel??? and evaluate their
+        performance on two downstream tasks: automatic transcription and chord
+        estimation.
+        <br />
+        The contrastive learning model implementation we picked to derive frame
+        level embeddings was from the Jaka to Melody (JTM) repository, which
+        utilizes contrastive predictive encoding (CPC). We also wished to use
+        embeddings from Jukebox as a comparison, which is a popular music
+        generation model developed by Open AI. Jukebox embeddings were chosen as
+        they are a good non-contrastive method to compare our results, and
+        evaluating them fills a gap in knowledge as they have not yet been
+        assessed on frame-level tasks in the MARBLE benchmark.
       </div>
       <div class="margin-right-block"></div>
     </div>
-    
 
     <div class="content-margin-container">
       <div class="margin-left-block"></div>
       <div class="main-content-block">
-        <h2>CPC Experiments</h2>
+        <h2>Encoders</h2>
+        <h1>CPC Encoder</h1>
         Our base implementation of CPC was based off
         <a
           href="https://github.com/tiagoCuervo/JTM/tree/main"
@@ -170,12 +207,15 @@
           this repository </a
         >from the JTM project. We used a convolutional SincNet encoder for
         \(g_{enc}\) and a simple GRU for \(g_{ar}\), which were architectures
-        that worked for the experiments in JTM. \(k\) for the autoregressive was
-        \(12\)
+        that worked for the experiments in JTM. \(k\) for the autoregressive
+        model was \(12\). Negative samples were uniformly sampled from audio
+        files. Other hyperparamters were as follows: <br />
+        Learning rate: \(2e-4\) <br />
+        Optimizer: Adam <br />
+        Epochs: 30 <br />
+        Batch size: 8 <br />
       </div>
-      <div class="margin-right-block">
-        Equation 1: probabilistic contrastive loss
-      </div>
+      <div class="margin-right-block"></div>
     </div>
 
     <div class="content-margin-container">
@@ -212,6 +252,120 @@
     <div class="content-margin-container">
       <div class="margin-left-block"></div>
       <div class="main-content-block">
+        <h1>Jukebox Embeddings</h1>
+        Talk about Jukebox
+      </div>
+      <div class="margin-right-block"></div>
+    </div>
+
+    <div class="content-margin-container">
+      <div class="margin-left-block"></div>
+      <div class="main-content-block">
+        <h2>Downstream Tasks</h2>
+        <h1>Music Transcription</h1>
+        We evaluated performance on music transcription with embeddings
+        generated by the CPC Model. <br /><br />
+        <b>CPC Embeddings</b> <br />
+        The first downstream task we wanted to try was automatic music
+        transcription, a basic seq2seq task. We train a very basic MLP network
+        that takes in embeddings of audio clips and generates the notes present
+        in that clip. The embeddings we use are the context embeddings generated
+        by the autoregressive model in CPC, which should encode both the actual
+        data and its context. The dataset we used for this task was the same one
+        we used to train the encoder, MusicNet. However, we focused only on
+        samples that were played by Solo Piano, to reduce complexity. <br />
+        To test these embeddings on a downstream task, we utilize a
+        transcription window, which pools the embeddings together for analysis.
+        This window aligns the embeddings with the correct transcription labels,
+        ensuring that the temporal relationships between the embeddings and the
+        ground truth are preserved. A diagram illustrating the different sizes
+        and components involved in this workflow is shown below. One parameter
+        we varied in our experiments is the size of the transcription window.
+        Adjusting the window size can impact performance, as larger windows pool
+        more information but may sacrifice temporal resolution, while smaller
+        windows retain finer temporal details but may dilute the contextual
+        signal. We tested different transcription window sizes but found it
+        didn't not impact performance that heavily in our experiments. <br />
+        The label for each transcription window is a one-hot encoding with size
+        129, which represents 128 possible MIDI notes + silence. <br />
+        The MLP network we used had a pooling layer to average the embeddings
+        across the transcription window and a hidden layer with 100 units. We
+        ran out of time, but wanted to test different architectures here as
+        well. The loss function was weighted BCEWithLogitsLoss. Because
+        transcription labels are very sparse and silent examples dominate, the
+        loss is weighted by the ratio of negative to ratio of positive examples,
+        to encourage predicting active notes.
+
+        <img src="./images/window.jpeg" />
+      </div>
+      <div class="margin-right-block"></div>
+    </div>
+
+    <div class="content-margin-container">
+      <div class="margin-left-block"></div>
+      <div class="main-content-block">
+        <h1>Chord Estimation</h1>
+        The second downstream task we wanted to try was chord estimation, which
+        tries to generate a sequence of played chords for a music audio file. We
+        were originally interested in this task because it was mentioned in the
+        MARBLE benchmarks, but there was almost no data on how models performed
+        on this task. We also wanted to explore if the CPC Encoder could
+        generalize to music it wasn't trained on, so we used a different
+        dataset. <br /><br />
+
+        <b>GuitarSet</b> <br />
+        We used the
+        <a
+          href="https://guitarset.weebly.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          GuitarSet</a
+        >
+        dataset for the chord estimation task. GuitarSet is a dataset of
+        annotated guitar recordings. Annotations contain not only notes but
+        labeled chords as well. For labelling, we decided to restrict the set of
+        possible chords to those used in the MARBLE benchmark. A subset is shown
+        below.
+
+        <img src="./images/chord_vocab.png" />
+        All possible combinations of root notes and chord types added up to 420
+        possible chords. <br /><br />
+
+        <b>CPC Embeddings</b> <br />
+        The classifier architecture started out the same as our classifier for
+        music transcription. To improve performance, we made a couple changes
+        that will be discussed in results. <br /><br />
+
+        <b>Jukebox Embeddings</b> <br />
+        The process for extracting GuitarSet Jukebox embeddings was based on the
+        method described in Castellon et al. (2021), with modifications inspired
+        by Spotify's Llark paper. Specifically, we used the output from the 36th
+        layer of the Jukebox encoder. The original Jukebox encoding produces a
+        4800-dimensional vector sampled at 345 Hz. To preprocess the audio, we
+        chunked it into 25-second clips—the maximum input length for Jukebox.
+        The embeddings were mean-pooled using a transcription window of 100 ms,
+        resulting in a downsampled frequency of 10 Hz and an embedding size of
+        approximately 1.2 million for each 25-second audio clip, with a final
+        dimension of [240, 4800]. A custom dataloader was implemented to align
+        the chord notations from the JAM files with the corresponding
+        embeddings, accounting for the transcription window as well as the start
+        and duration times in the JAM files. The dataset was heavily imbalanced,
+        as most embeddings corresponded to silence, labeled as 'N'. The figure
+        below illustrates the distribution of chord classes across all embedding
+        windows.
+        <img src="./images/chord_frequencies.jpeg" />
+        <br /><br />
+        For the downstream task, we used the same 100-layer MLP architecture
+        that was used to evaluate JTM. To address dataset imbalance, we applied
+        a weighted BCE loss function similar to the one used in JTM.
+      </div>
+      <div class="margin-right-block"></div>
+    </div>
+
+    <div class="content-margin-container">
+      <div class="margin-left-block"></div>
+      <div class="main-content-block">
         <h2>Results</h2>
         <h1>Encoder Training</h1>
       </div>
@@ -220,104 +374,41 @@
 
     <div class="content-margin-container">
       <div class="margin-left-block"></div>
-      <div
-        class="main-content-block"
-        style="
-          display: flex;
-          gap: 10px;
-          justify-content: center;
-          align-items: center;
-        "
-      >
-        <div>
-          <img src="./images/encoder_training/big_train_acc1.png" />
-          <!-- Training acc for prediction step \(t = 0\) (yaxis scale from 0 - 1) -->
-        </div>
-        <div>
-          <img src="./images/encoder_training/big_train_acc5.png" />
-          <!-- Training acc for prediction \(t = 5\) -->
-        </div>
-        <!-- <img src="./images/encoder_training/train_acc_1.jpeg" width="300" /> -->
+      <div class="main-content-block">
+        <img src="./images/encoder_training/allTrainAcc.jpeg" />
+        <img src="./images/encoder_training/allTrainLoss.jpeg" />
       </div>
       <div class="margin-right-block"></div>
     </div>
 
-    <div class="content-margin-container">
-      <div class="margin-left-block"></div>
-      <div
-        class="main-content-block"
-        style="
-          display: flex;
-          gap: 10px;
-          justify-content: center;
-          align-items: center;
-        "
-      >
-        <div>
-          <img src="./images/encoder_training/big_train_acc10.png" width="50%" />
-          <!-- Training acc for prediction for \(t = 10\) -->
-        </div>
-      </div>
-      <div class="margin-right-block"></div>
-    </div>
     <div class="content-margin-container">
       <div class="margin-left-block"></div>
       <div class="main-content-block">
-        As expected, training accuracy drops as \(t\) increases.
+        The model overall seems to converge and can discriminate between
+        positive and negative examples. As expected, accuracy is lower when
+        making predictions farther into the future. In the legend, the last
+        number indicates how many time steps ahead the autoregressive model is
+        predicting.
       </div>
       <div class="margin-right-block"></div>
     </div>
 
-	<div class="content-margin-container">
-		<div class="margin-left-block"></div>
-		<div class="main-content-block">
-		  <h2>Downstream Tasks</h2>
-		  <h1>Note Transcription</h1>
-		</div>
-		<div class="margin-right-block"></div>
-	  </div>
-    <div class="content-margin-container" id="does_x_do_y">
+    <div class="content-margin-container">
       <div class="margin-left-block"></div>
       <div class="main-content-block">
-        <h1>Does X do Y?</h1>
-        It is well known that Y does Y. And this has raised the question does X
-        do Y? Because if Y does Y then it stands to reason that X does Y. But we
-        cannot answer this until we realize the Z implies Y and X can be linked
-        to Z.<br /><br />
-
-        Now let's write some math!<br />
-        <center>
-          <math xmlns="http://www.w3.org/1998/Math/MathML">
-            <mrow>
-              <mrow>
-                <mo>&#x2202;</mo>
-                <mi>y</mi>
-              </mrow>
-              <mo>/</mo>
-              <mrow>
-                <mo>&#x2202;</mo>
-                <mi>x</mi>
-              </mrow>
-            </mrow>
-            <mo>=</mo>
-            <mi>x</mi>
-          </math>
-        </center>
-        <br />
-        It's probably best to ask an LLM to help do the web formatting for math.
-        You can tell it "convert this latex equation into MathML:
-        $$\frac{\partial dy}{\partial dx} = x$$" But it took me a few tries. So,
-        if you get frustrated, you can embed an image of the equation, or use
-        other packages for rendering equations on webpages.
+        <h2>Downstream Tasks</h2>
+        <h1>Automatic Note Transcription</h1>
+		We generated graphs of training loss and accuracy.
+		<img src="./images/music_transcription_jtm/classifierTrainLoss.jpeg" />
+		<img src="./images/music_transcription_jtm/classTrainAcc.jpeg" />
+		Originally, the results looked quite good but then we tried visualizing the predicted notes against the labels.
+		<img src="./images/music_transcription_jtm/class_note_vis.png" />
       </div>
-      <div class="margin-right-block" style="transform: translate(0%, -100%)">
-        <!-- you can move the margin notes up and down with translate -->
-        Interestingly, Plato also asked if X does Y, in
-        <a href="#ref_1">[1]</a>.
-      </div>
+      <div class="margin-right-block"></div>
     </div>
+    
 
-    <div class="content-margin-container">
+    <!-- <div class="content-margin-container">
       <div class="margin-left-block"></div>
       <div class="main-content-block">
         <h1>Background and Related Work</h1>
@@ -329,7 +420,7 @@
       <div class="margin-right-block">
         A caption for the video could go here.
       </div>
-    </div>
+    </div> -->
 
     <div class="content-margin-container" id="citations">
       <div class="margin-left-block"></div>
