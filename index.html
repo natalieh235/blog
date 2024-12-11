@@ -84,87 +84,37 @@
       <div class="margin-left-block"></div>
       <div class="main-content-block">
         <h1>Introduction</h1>
-        While self-supervised
+        Contrastive learning has demonstrated significant success in domains like computer vision and natural language processing by creating robust, generalized embeddings from unlabeled data. This method is especially valuable in the field of musical information retrieval (MIR) tasks, where annotating and labeling music and audio data is time-intensive, and the ratio of labeled to unlabeled data is heavily skewed. In this project, we wish to apply contrastive learning techniques to create musical embeddings and evaluate their utility in MIR tasks. 
+        <br /><br />
+        While musical embeddings derived from contrastive learning methods have been applied to high-level tasks such as classifying tags (e.g., genre, emotion, or artist), they have not yet been evaluated on frame-level tasks. Frame-level tasks, including chord estimation and beat tracking, differ from high-level tasks as they require embeddings that capture temporal information at a fine granularity. Our goal is to explore strategies for generating frame-level embeddings using contrastive learning, test these embeddings on sequence-to-sequence (seq2seq) tasks, and compare their performance to existing methods.
+
       </div>
       <div class="margin-right-block">Delete this</div>
     </div>
 
-    <div class="content-margin-container" id="does_x_do_y">
-      <div class="margin-left-block"></div>
-      <div class="main-content-block">
-        <h1>Does X do Y?</h1>
-        It is well known that Y does Y. And this has raised the question does X
-        do Y? Because if Y does Y then it stands to reason that X does Y. But we
-        cannot answer this until we realize the Z implies Y and X can be linked
-        to Z.<br /><br />
-
-        Now let's write some math!<br />
-        <center>
-          <math xmlns="http://www.w3.org/1998/Math/MathML">
-            <mrow>
-              <mrow>
-                <mo>&#x2202;</mo>
-                <mi>y</mi>
-              </mrow>
-              <mo>/</mo>
-              <mrow>
-                <mo>&#x2202;</mo>
-                <mi>x</mi>
-              </mrow>
-            </mrow>
-            <mo>=</mo>
-            <mi>x</mi>
-          </math>
-        </center>
-        <br />
-        It's probably best to ask an LLM to help do the web formatting for math.
-        You can tell it "convert this latex equation into MathML:
-        $$\frac{\partial dy}{\partial dx} = x$$" But it took me a few tries. So,
-        if you get frustrated, you can embed an image of the equation, or use
-        other packages for rendering equations on webpages.
-      </div>
-      <div class="margin-right-block" style="transform: translate(0%, -100%)">
-        <!-- you can move the margin notes up and down with translate -->
-        Interestingly, Plato also asked if X does Y, in
-        <a href="#ref_1">[1]</a>.
-      </div>
-    </div>
-
-    <div class="content-margin-container">
+    <div class="content-margin-container" id="intro">
       <div class="margin-left-block"></div>
       <div class="main-content-block">
         <h1>Background and Related Work</h1>
-        In this section we embed a video:
-        <video class="my-video" loop autoplay muted style="width: 725px">
-          <source src="./images/mtsh.mp4" type="video/mp4" />
-        </video>
-      </div>
-      <div class="margin-right-block">
-        A caption for the video could go here.
-      </div>
-    </div>
+        
+        Contrastive Learning was popularized through SimCLR in computer vision. In the audio domain, this framework has been extended, used in music [CLMR, MULE] and speech [Speech SimCLR], leading to competitive performance in music (genre classification, multi-class classification) and speech benchmarks (speech emotion recognition).
+        <br /><br />
+        The MARBLE Benchmark was specifically developed to probe and compare embeddings from a range of popular music models, including those derived from contrastive learning (e.g., CLMR and MULE) as well as models like Jukebox, MusicCNN, and the MAP-based family (MAP-Music2Vec, MAP-MERT). While MULE and Jukebox achieved leading performance on high-level tasks such as genre classification, they were not evaluated on seq2seq tasks like chord estimation and beat tracking, as they lack frame-level embeddings. In contrast, models from the MAP-based family provide frame-level embeddings, making them better suited for these tasks.
+        <br /><br />
+        Motivated by this gap, we aim to assess whether frame-level embeddings can be derived from contrastive learning methods. We will evaluate these embeddings on downstream seq2seq tasks, focusing on chord estimation, to compare their performance with existing methods.
+        
+        <h4>Contrastive Predictive Encoding</h4>
+        <div class="content-margin-container">
+          <div class="margin-left-block"></div>
+          <div class="main-content-block">
+            <img src="./images/cpc_architecture.png" width="512px" />
+          </div>
+          <div class="margin-right-block">
+            Figure 1: Visualization of CPC architecture
+          </div>
+        </div>
 
-    <div class="content-margin-container">
-      <div class="margin-left-block"></div>
-      <div class="main-content-block">
-        <h2>Methods and Experiments</h2>
-      </div>
-      <div class="margin-right-block"></div>
-    </div>
-
-    <div class="content-margin-container">
-      <div class="margin-left-block"></div>
-      <div class="main-content-block">
-        <img src="./images/cpc_architecture.png" width="512px" />
-      </div>
-      <div class="margin-right-block">
-        Figure 1: Visualization of CPC architecture
-      </div>
-    </div>
-
-    <div class="content-margin-container">
-      <div class="margin-left-block"></div>
-      <div class="main-content-block">
+        <br />
         We chose to use Contrastive Predictive Coding (CPC) to learn frame-level
         musical representations due to its similarity to SimCLR and
         compatibility with sequential data. Similar to SimCLR, CPC uses postivie
@@ -177,10 +127,12 @@
         of the context \(c_t\). Specifically, CPC tries to predict the next
         \(k\) samples. CPC minimizes a probabilistic contrastive loss, shown
         below.
+        
       </div>
-      <div class="margin-right-block"></div>
+      <div class="margin-right-block">Delete this</div>
     </div>
 
+    
     <div class="content-margin-container">
       <div class="margin-left-block"></div>
       <div class="main-content-block">
@@ -191,9 +143,24 @@
       </div>
     </div>
 
+    
+
     <div class="content-margin-container">
       <div class="margin-left-block"></div>
       <div class="main-content-block">
+        <h2>Methods and Experiments</h2>
+        The contrastive learning model we picked to derive frame level embeddings was Jaka to Melody (JTM) which utilizes contrastive predictive encoding (CPC). We also wished to use embeddings from Jukebox as a comparison, which is a popular music generation model developed by Open AI. Jukebox embeddings were chosen as they are a good non-contrastive method to compare our results, and evaluating them fills a gap in knowledge as they were also not assessed on frame-level tasks in the MARBLE benchmark.  
+      
+      
+      </div>
+      <div class="margin-right-block"></div>
+    </div>
+    
+
+    <div class="content-margin-container">
+      <div class="margin-left-block"></div>
+      <div class="main-content-block">
+        <h2>CPC Experiments</h2>
         Our base implementation of CPC was based off
         <a
           href="https://github.com/tiagoCuervo/JTM/tree/main"
@@ -309,6 +276,60 @@
 		</div>
 		<div class="margin-right-block"></div>
 	  </div>
+    <div class="content-margin-container" id="does_x_do_y">
+      <div class="margin-left-block"></div>
+      <div class="main-content-block">
+        <h1>Does X do Y?</h1>
+        It is well known that Y does Y. And this has raised the question does X
+        do Y? Because if Y does Y then it stands to reason that X does Y. But we
+        cannot answer this until we realize the Z implies Y and X can be linked
+        to Z.<br /><br />
+
+        Now let's write some math!<br />
+        <center>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <mrow>
+              <mrow>
+                <mo>&#x2202;</mo>
+                <mi>y</mi>
+              </mrow>
+              <mo>/</mo>
+              <mrow>
+                <mo>&#x2202;</mo>
+                <mi>x</mi>
+              </mrow>
+            </mrow>
+            <mo>=</mo>
+            <mi>x</mi>
+          </math>
+        </center>
+        <br />
+        It's probably best to ask an LLM to help do the web formatting for math.
+        You can tell it "convert this latex equation into MathML:
+        $$\frac{\partial dy}{\partial dx} = x$$" But it took me a few tries. So,
+        if you get frustrated, you can embed an image of the equation, or use
+        other packages for rendering equations on webpages.
+      </div>
+      <div class="margin-right-block" style="transform: translate(0%, -100%)">
+        <!-- you can move the margin notes up and down with translate -->
+        Interestingly, Plato also asked if X does Y, in
+        <a href="#ref_1">[1]</a>.
+      </div>
+    </div>
+
+    <div class="content-margin-container">
+      <div class="margin-left-block"></div>
+      <div class="main-content-block">
+        <h1>Background and Related Work</h1>
+        In this section we embed a video:
+        <video class="my-video" loop autoplay muted style="width: 725px">
+          <source src="./images/mtsh.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <div class="margin-right-block">
+        A caption for the video could go here.
+      </div>
+    </div>
 
     <div class="content-margin-container" id="citations">
       <div class="margin-left-block"></div>
