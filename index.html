@@ -64,10 +64,11 @@
         <!-- table of contents here -->
         <div style="position: fixed; max-width: inherit; top: max(20%, 120px)">
           <b style="font-size: 16px">Outline</b><br /><br />
-          <a href="#intro">Introduction</a><br /><br />
-          <a href="#does_x_do_y">Does X do Y?</a><br /><br />
+          <a href="#intro">Background</a><br /><br />
+          <a href="#does_x_do_y">Methods</a><br /><br />
+		  <a href="#does_x_do_y">Results</a><br /><br />
           <a href="#implications_and_limitations"
-            >Implications and limitations</a
+            >Conclusion</a
           ><br /><br />
         </div>
       </div>
@@ -84,7 +85,7 @@
     <div class="content-margin-container" id="intro">
       <div class="margin-left-block"></div>
       <div class="main-content-block">
-        <h1>Introduction</h1>
+        <h2>Introduction</h2>
         Contrastive learning has demonstrated significant success in domains
         like computer vision and natural language processing by creating robust,
         generalized embeddings from unlabeled data. This method is especially
@@ -110,7 +111,7 @@
     <div class="content-margin-container" id="intro">
       <div class="margin-left-block"></div>
       <div class="main-content-block">
-        <h1>Background and Related Work</h1>
+        <h2>Background</h2>
 
         Contrastive Learning was popularized through SimCLR (Chen et al. 2020)
         in computer vision. In the audio domain, this framework has been
@@ -146,7 +147,7 @@
         Motivated by this gap, we aim to assess whether frame-level embeddings
         can be derived from contrastive learning methods. We will evaluate these
         embeddings on downstream seq2seq tasks, focusing on chord estimation, to
-        compare their performance with existing methods.
+        compare their performance with existing methods. <br/><br/>
 
         <h1>Related Work</h1>
         Here, we give a brief overfiew of models used in our experiments.
@@ -215,8 +216,7 @@
         <h2>Methods and Experiments</h2>
         As an overview, we wanted to explore how different music embeddings
         performed on seq2seq downstream tasks. We explore embeddings generated
-        by two different encoders, one with CPC and the Jukebox encodings which
-        are generated using student-teacher moddel??? and evaluate their
+        by two different encoders, one with CPC and one with the Jukebox encodings, and evaluate their
         performance on two downstream tasks: automatic transcription and chord
         estimation.
         <br />
