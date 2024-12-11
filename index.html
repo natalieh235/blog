@@ -64,12 +64,11 @@
         <!-- table of contents here -->
         <div style="position: fixed; max-width: inherit; top: max(20%, 120px)">
           <b style="font-size: 16px">Outline</b><br /><br />
-          <a href="#intro">Background</a><br /><br />
-          <a href="#does_x_do_y">Methods</a><br /><br />
-		  <a href="#does_x_do_y">Results</a><br /><br />
-          <a href="#implications_and_limitations"
-            >Conclusion</a
-          ><br /><br />
+          <a href="#intro">Intro</a><br /><br />
+          <a href="#bg">Background</a><br /><br />
+          <a href="#methods">Methods</a><br /><br />
+          <a href="#results">Results</a><br /><br />
+          <a href="#conclusion">Conclusion</a><br /><br />
         </div>
       </div>
 
@@ -108,7 +107,7 @@
       <div class="margin-right-block"></div>
     </div>
 
-    <div class="content-margin-container" id="intro">
+    <div class="content-margin-container" id="bg">
       <div class="margin-left-block"></div>
       <div class="main-content-block">
         <h2>Background</h2>
@@ -147,7 +146,7 @@
         Motivated by this gap, we aim to assess whether frame-level embeddings
         can be derived from contrastive learning methods. We will evaluate these
         embeddings on downstream seq2seq tasks, focusing on chord estimation, to
-        compare their performance with existing methods. <br/><br/>
+        compare their performance with existing methods. <br /><br />
 
         <h1>Related Work</h1>
         Here, we give a brief overfiew of models used in our experiments.
@@ -165,16 +164,15 @@
         <br /><br />
         We chose to use Contrastive Predictive Coding (CPC) to learn frame-level
         musical representations due to its similarity to SimCLR and
-        compatibility with sequential data. Similar to SimCLR, CPC uses postivie
-        and negative example pairs to learn representations. However, CPC also
-        uses an autoregressive model to include the context of data sample in
-        the latent representation. Formally, the CPC model consists of an
-        encoder \( z_t = g_{enc}(x_t) \) that maps observation \(x_t\) to latent
-        representation \(z_t\). Next, an autogressive model \(g_{ar}\) takes the
-        existing sequence of \(z_t\) vectors to produce a latent representation
-        of the context \(c_t\). Specifically, CPC tries to predict the next
-        \(k\) samples. CPC minimizes a probabilistic contrastive loss, shown
-        below.
+        compatibility with sequential data. CPC uses positive and negative
+        example pairs to learn representations, as well as an autoregressive
+        model to include the context of data sample in the latent
+        representation. Formally, the CPC model consists of an encoder \( z_t =
+        g_{enc}(x_t) \) that maps observation \(x_t\) to latent representation
+        \(z_t\). Next, an autogressive model \(g_{ar}\) takes the existing
+        sequence of \(z_t\) vectors to produce a latent representation of the
+        context \(c_t\). Specifically, CPC tries to predict the next \(k\)
+        samples. CPC minimizes a probabilistic contrastive loss, shown below.
       </div>
       <div class="margin-right-block"></div>
     </div>
@@ -210,15 +208,15 @@
       <div class="margin-right-block"></div>
     </div>
 
-    <div class="content-margin-container">
+    <div class="content-margin-container" id="methods">
       <div class="margin-left-block"></div>
       <div class="main-content-block">
         <h2>Methods and Experiments</h2>
         As an overview, we wanted to explore how different music embeddings
         performed on seq2seq downstream tasks. We explore embeddings generated
-        by two different encoders, one with CPC and one with the Jukebox encodings, and evaluate their
-        performance on two downstream tasks: automatic transcription and chord
-        estimation.
+        by two different encoders, one with CPC and one with the Jukebox
+        encodings, and evaluate their performance on two downstream tasks:
+        automatic transcription and chord estimation.
         <br />
         The contrastive learning model implementation we picked to derive frame
         level embeddings was from the Jaka to Melody (JTM) repository, which
@@ -409,7 +407,7 @@
       <div class="margin-right-block"></div>
     </div>
 
-    <div class="content-margin-container">
+    <div class="content-margin-container" id="results">
       <div class="margin-left-block"></div>
       <div class="main-content-block">
         <h2>Results</h2>
@@ -535,7 +533,7 @@
       <div class="margin-right-block"></div>
     </div>
 
-    <div class="content-margin-container">
+    <div class="content-margin-container" id="conclusion">
       <div class="margin-left-block"></div>
       <div class="main-content-block">
         <h1>Conclusion</h1>
@@ -577,7 +575,8 @@
           <span style="font-size: 16px">References:</span><br /><br />
           <a id="ref_1"></a>[1]
           <a href="https://arxiv.org/abs/2002.05709"
-            >A Simple Framework for Contrastive Learning of Visual Representations</a
+            >A Simple Framework for Contrastive Learning of Visual
+            Representations</a
           >, Ting Chen et al, 2020<br /><br />
 
           <a id="ref_2"></a>[2]
@@ -587,79 +586,59 @@
 
           <a id="ref_3"></a>[3]
           <a href="https://arxiv.org/abs/2210.03799"
-            >Supervised and Unsupervised Learning of Audio Representations for Music Understanding (MULE)</a
+            >Supervised and Unsupervised Learning of Audio Representations for
+            Music Understanding (MULE)</a
           >, McCalllum et al, 2022<br /><br />
 
           <a id="ref_4"></a>[4]
           <a href="https://arxiv.org/pdf/2010.13991"
-            >Speech SimCLR: Combining Contrastive and Reconstruction Objective for
-            Self-supervised Speech Representation Learning
-            </a
+            >Speech SimCLR: Combining Contrastive and Reconstruction Objective
+            for Self-supervised Speech Representation Learning </a
           >, Jiang et al, 2021<br /><br />
 
           <a id="ref_5"></a>[5]
           <a href="https://arxiv.org/pdf/2306.10548"
-            >MARBLE: Music Audio Representation Benchmark
-            for Universal Evaluation
-            
-            </a
+            >MARBLE: Music Audio Representation Benchmark for Universal
+            Evaluation </a
           >, Yuan et al, 2023<br /><br />
 
           <a id="ref_6"></a>[6]
           <a href="https://arxiv.org/pdf/2306.04186"
-            >Self-supervised Audio Teacher-Student Transformer
-            for Both Clip-level and Frame-level Tasks
-            
-            
-            </a
+            >Self-supervised Audio Teacher-Student Transformer for Both
+            Clip-level and Frame-level Tasks </a
           >, Li et al, 2023<br /><br />
 
           <a id="ref_7"></a>[7]
           <a href="https://arxiv.org/pdf/1807.03748"
-            >Representation Learning with
-            Contrastive Predictive Coding
-            
-            </a
+            >Representation Learning with Contrastive Predictive Coding </a
           >, DeepMind, 2019<br /><br />
 
           <a id="ref_8"></a>[8]
           <a href="https://arxiv.org/pdf/2005.00341"
-            >Jukebox: A Generative Model for Music
-            
-            </a
+            >Jukebox: A Generative Model for Music </a
           >, OpenAI, 2020<br /><br />
 
           <a id="ref_9"></a>[9]
           <a href="https://arxiv.org/pdf/2005.00341"
-            >Generating Diverse High-Fidelity Images with VQ-VAE-2
-            
-            </a
+            >Generating Diverse High-Fidelity Images with VQ-VAE-2 </a
           >, Razavi et al, 2019<br /><br />
 
           <a id="ref_10"></a>[10]
-          <a href="https://guitarset.weebly.com/uploads/1/2/1/6/121620128/xi_ismir_2018.pdf"
-            >GUITARSET: A DATASET FOR GUITAR TRANSCRIPTION
-            
-            </a
+          <a
+            href="https://guitarset.weebly.com/uploads/1/2/1/6/121620128/xi_ismir_2018.pdf"
+            >GUITARSET: A DATASET FOR GUITAR TRANSCRIPTION </a
           >, Xi et al, 2018<br /><br />
 
           <a id="ref_11"></a>[11]
           <a href="https://arxiv.org/abs/2107.05677"
-            >Codified audio language modeling learns useful representations for music information retrieval
-
-            
-            </a
+            >Codified audio language modeling learns useful representations for
+            music information retrieval </a
           >, Castellon et al, 2021<br /><br />
 
           <a id="ref_12"></a>[12]
           <a href="https://arxiv.org/pdf/2310.07160"
-            >Llark: A Multimodal Instruction-Following Language Model for Music
-            
-            </a
+            >Llark: A Multimodal Instruction-Following Language Model for Music </a
           >, Spotify et al, 2024<br /><br />
-
-         
-          
         </div>
       </div>
       <div class="margin-right-block">
